@@ -89,7 +89,11 @@ SCENELAUNCH = (-1, #Scene 1 Launch
 SELCLIPLAUNCH = -1 #Selected clip launch
 STOPALLCLIPS = -1 #Stop all clips
 
-# 8x8 Matrix note assignments
+NUM_SCENES = 1
+NUM_TRACKS = 3
+
+# 8x8 Matrix note assignments.
+# Only the NUM_SCENES x NUM_TRACKS sub-matrix will be mapped
 # Track no.:     1   2   3   4   5   6   7   8
 CLIPNOTEMAP = ((-1, -1, -1, -1, -1, -1, -1, -1), #Row 1
                (-1, -1, -1, -1, -1, -1, -1, -1), #Row 2

@@ -57,10 +57,10 @@ SEEKFWD = -1 #Seek forward
 SEEKRWD = -1 #Seek rewind
 
 # Session Navigation (aka "red box")
-SESSIONLEFT = -1 #Session left
-SESSIONRIGHT = -1 #Session right
-SESSIONUP = -1 #Session up
-SESSIONDOWN = -1 #Session down
+SESSIONLEFT = 12 #Session left
+SESSIONRIGHT = 16 #Session right
+SESSIONUP = 4 #Session up
+SESSIONDOWN = 8 #Session down
 ZOOMUP = -1 #Session Zoom up
 ZOOMDOWN = -1 #Session Zoom down
 ZOOMLEFT = -1 #Session Zoom left
@@ -96,7 +96,7 @@ NUM_TRACKS = 3
 # 8x8 Matrix note assignments.
 # Only the NUM_SCENES x NUM_TRACKS sub-matrix will be mapped
 # Track no.:     1   2   3   4   5   6   7   8
-CLIPNOTEMAP = ((-1, -1, -1, -1, -1, -1, -1, -1), #Row 1
+CLIPNOTEMAP = (( 1,  2,  3, -1, -1, -1, -1, -1), #Row 1
                (-1, -1, -1, -1, -1, -1, -1, -1), #Row 2
                (-1, -1, -1, -1, -1, -1, -1, -1), #Row 3
                (-1, -1, -1, -1, -1, -1, -1, -1), #Row 4
@@ -108,9 +108,9 @@ CLIPNOTEMAP = ((-1, -1, -1, -1, -1, -1, -1, -1), #Row 1
 
 # Track Control
 MASTERSEL = -1 #Master track select
-TRACKSTOP = (-1, #Track 1 Clip Stop
-             -1, #Track 2
-             -1, #Track 3
+TRACKSTOP = ( 5, #Track 1 Clip Stop
+              6, #Track 2
+              7, #Track 3
              -1, #Track 4
              -1, #Track 5
              -1, #Track 6

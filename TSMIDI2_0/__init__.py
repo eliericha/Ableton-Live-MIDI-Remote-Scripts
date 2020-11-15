@@ -1,12 +1,13 @@
 # emacs-mode: -*- python-*-
 # -*- coding: utf-8 -*-
 
-import Live
-from YourControllerName import YourControllerName
+# import Live
+from TSMIDI20Impl import TSMIDIClass
+
 
 def create_instance(c_instance):
     ' Creates and returns the APC20 script '
-    return YourControllerName(c_instance)
+    return TSMIDIClass(c_instance)
 
 
 # local variables:

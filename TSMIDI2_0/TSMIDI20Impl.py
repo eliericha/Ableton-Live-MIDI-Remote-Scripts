@@ -1,40 +1,36 @@
-#
-#
-#
-
-from __future__ import with_statement
-
-import Live
+# import Live
 from _Framework.ControlSurface import ControlSurface
 from _Framework.InputControlElement import *
 from _Framework.SliderElement import SliderElement
 from _Framework.ButtonElement import ButtonElement
-from _Framework.ButtonMatrixElement import ButtonMatrixElement
-from _Framework.ChannelStripComponent import ChannelStripComponent
+# from _Framework.ButtonMatrixElement import ButtonMatrixElement
+# from _Framework.ChannelStripComponent import ChannelStripComponent
 from _Framework.DeviceComponent import DeviceComponent
-from _Framework.ControlSurfaceComponent import ControlSurfaceComponent
-from _Framework.SessionZoomingComponent import SessionZoomingComponent
+# from _Framework.ControlSurfaceComponent import ControlSurfaceComponent
+# from _Framework.SessionZoomingComponent import SessionZoomingComponent
 from SpecialMixerComponent import SpecialMixerComponent
 from SpecialTransportComponent import SpecialTransportComponent
 from SpecialSessionComponent import SpecialSessionComponent
 from SpecialZoomingComponent import SpecialZoomingComponent
 from SpecialViewControllerComponent import DetailViewControllerComponent
 from MIDI_Map import *
-#MIDI_NOTE_TYPE = 0
-#MIDI_CC_TYPE = 1
-#MIDI_PB_TYPE = 2
+# MIDI_NOTE_TYPE = 0
+# MIDI_CC_TYPE = 1
+# MIDI_PB_TYPE = 2
 
-class YourControllerName(ControlSurface):
-    __doc__ = " Script for YourControllerName in APC emulation mode "
+
+class TSMIDIClass(ControlSurface):
+    __doc__ = " Script for TSMIDIClass in APC emulation mode "
 
     _active_instances = []
+
+    @staticmethod
     def _combine_active_instances():
         track_offset = 0
         scene_offset = 0
-        for instance in YourControllerName._active_instances:
+        for instance in TSMIDIClass._active_instances:
             instance._activate_combination_mode(track_offset, scene_offset)
             track_offset += instance._session.width()
-    _combine_active_instances = staticmethod(_combine_active_instances)
 
     def __init__(self, c_instance):
         ControlSurface.__init__(self, c_instance)
@@ -53,6 +49,7 @@ class YourControllerName(ControlSurface):
             self.set_highlighting_session_component(self._session)
             #self.set_suppress_rebuild_requests(False)
         self._pads = []
+        self._shift_button = None
         self._load_pad_translations()
         self._do_combine()
 
@@ -70,15 +67,15 @@ class YourControllerName(ControlSurface):
 
 
     def _do_combine(self):
-        if self not in YourControllerName._active_instances:
-            YourControllerName._active_instances.append(self)
-            YourControllerName._combine_active_instances()
+        if self not in TSMIDIClass._active_instances:
+            TSMIDIClass._active_instances.append(self)
+            TSMIDIClass._combine_active_instances()
 
 
     def _do_uncombine(self):
-        if ((self in YourControllerName._active_instances) and YourControllerName._active_instances.remove(self)):
+        if ((self in TSMIDIClass._active_instances) and TSMIDIClass._active_instances.remove(self)):
             self._session.unlink()
-            YourControllerName._combine_active_instances()
+            TSMIDIClass._combine_active_instances()
 
 
     def _activate_combination_mode(self, track_offset, scene_offset):

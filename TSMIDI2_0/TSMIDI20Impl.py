@@ -205,7 +205,14 @@ class TSMIDIClass(ControlSurface):
 
 
     def _load_MIDI_map(self):
-        is_momentary = True
+        # Midi messages can be either "Toggle" or "Momentary".
+        #
+        # A toggle message consists of a single message with value 127, while a
+        # momentary message first sends 127, followed by 0.
+        #
+        # Set this flag according to which kind of messages you're using.
+        is_momentary = False
+
         for note in range(128):
             button = ButtonElement(is_momentary, MESSAGETYPE, BUTTONCHANNEL, note)
             button.name = 'Note_' + str(note)

@@ -21,7 +21,7 @@ MESSAGETYPE = 1 #Message type for buttons/pads; set to 0 for MIDI Notes, 1 for C
 PLAY = -1 #Global play
 STOP = -1 #Global stop
 REC = -1 #Global record
-TAPTEMPO = -1 #Tap tempo
+TAPTEMPO = 16 #Tap tempo
 NUDGEUP = -1 #Tempo Nudge Up
 NUDGEDOWN = -1 #Tempo Nudge Down
 UNDO = -1 #Undo
@@ -29,11 +29,11 @@ REDO = -1 #Redo
 LOOP = -1 #Loop on/off
 PUNCHIN = -1 #Punch in
 PUNCHOUT = -1 #Punch out
-OVERDUB = -1 #Overdub on/off
-METRONOME = -1 #Metronome on/off
+OVERDUB = 8 #Overdub on/off
+METRONOME = 12 #Metronome on/off
 RECQUANT = -1 #Record quantization on/off
 DETAILVIEW = -1 #Detail view switch
-CLIPTRACKVIEW = -1 #Clip/Track view switch
+CLIPTRACKVIEW = 9  #Clip/Track view switch
 
 # Device Control
 DEVICELOCK = -1 #Device Lock (lock "blue hand")
@@ -57,10 +57,10 @@ SEEKFWD = -1 #Seek forward
 SEEKRWD = -1 #Seek rewind
 
 # Session Navigation (aka "red box")
-SESSIONLEFT = 12 #Session left
-SESSIONRIGHT = 16 #Session right
-SESSIONUP = 4 #Session up
-SESSIONDOWN = 8 #Session down
+SESSIONLEFT = 13 #Session left
+SESSIONRIGHT = 15 #Session right
+SESSIONUP = 10 #Session up
+SESSIONDOWN = 14 #Session down
 ZOOMUP = -1 #Session Zoom up
 ZOOMDOWN = -1 #Session Zoom down
 ZOOMLEFT = -1 #Session Zoom left
@@ -88,8 +88,10 @@ SCENELAUNCH = (-1, #Scene 1 Launch
 
 # Clip Launch / Stop
 SELCLIPLAUNCH = -1 #Selected clip launch
-STOPALLCLIPS = -1 #Stop all clips
+STOPALLCLIPS = 4  #Stop all clips
 
+# These values define the size of the rectangle controlled by
+# the script in the session view
 NUM_SCENES = 1
 NUM_TRACKS = 3
 
@@ -107,7 +109,7 @@ CLIPNOTEMAP = (( 1,  2,  3, -1, -1, -1, -1, -1), #Row 1
                )
 
 # Track Control
-MASTERSEL = -1 #Master track select
+MASTERSEL = 11 #Master track select
 TRACKSTOP = ( 5, #Track 1 Clip Stop
               6, #Track 2
               7, #Track 3

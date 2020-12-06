@@ -8,12 +8,12 @@ from _Framework.ButtonElement import ButtonElement
 from _Framework.DeviceComponent import DeviceComponent
 # from _Framework.ControlSurfaceComponent import ControlSurfaceComponent
 # from _Framework.SessionZoomingComponent import SessionZoomingComponent
-from SpecialMixerComponent import SpecialMixerComponent
-from SpecialTransportComponent import SpecialTransportComponent
-from SpecialSessionComponent import SpecialSessionComponent
-from SpecialZoomingComponent import SpecialZoomingComponent
-from SpecialViewControllerComponent import DetailViewControllerComponent
-from MIDI_Map import *
+from .SpecialMixerComponent import SpecialMixerComponent
+from .SpecialTransportComponent import SpecialTransportComponent
+from .SpecialSessionComponent import SpecialSessionComponent
+from .SpecialZoomingComponent import SpecialZoomingComponent
+from .SpecialViewControllerComponent import DetailViewControllerComponent
+from .MIDI_Map import *
 # MIDI_NOTE_TYPE = 0
 # MIDI_CC_TYPE = 1
 # MIDI_PB_TYPE = 2
@@ -87,8 +87,11 @@ class TSMIDIClass(ControlSurface):
 
 
     def _setup_session_control(self):
-        is_momentary = True
+        # is_momentary = True
         self._session = SpecialSessionComponent(NUM_TRACKS, NUM_SCENES)
+
+        # self.log_message("\n%s" % dir(self._session))
+
         self._session.name = 'Session_Control'
         self._session.set_track_bank_buttons(self._note_map[SESSIONRIGHT], self._note_map[SESSIONLEFT])
         self._session.set_scene_bank_buttons(self._note_map[SESSIONDOWN], self._note_map[SESSIONUP])
@@ -96,10 +99,14 @@ class TSMIDIClass(ControlSurface):
         self._scene_launch_buttons = [self._note_map[SCENELAUNCH[index]] for index in range(NUM_SCENES) ]
         self._track_stop_buttons = [self._note_map[TRACKSTOP[index]] for index in range(NUM_TRACKS) ]
         self._session.set_stop_all_clips_button(self._note_map[STOPALLCLIPS])
+
         self._session.set_stop_track_clip_buttons(tuple(self._track_stop_buttons))
+
         self._session.selected_scene().name = 'Selected_Scene'
         self._session.selected_scene().set_launch_button(self._note_map[SELSCENELAUNCH])
+
         self._session.set_slot_launch_button(self._note_map[SELCLIPLAUNCH])
+
         for scene_index in range(NUM_SCENES):
             scene = self._session.scene(scene_index)
             scene.name = 'Scene_' + str(scene_index)
@@ -110,14 +117,21 @@ class TSMIDIClass(ControlSurface):
                 button = self._note_map[CLIPNOTEMAP[scene_index][track_index]]
                 button_row.append(button)
                 clip_slot = scene.clip_slot(track_index)
-                clip_slot.name = str(track_index) + '_Clip_Slot_' + str(scene_index)
+                clip_slot.name = "Scene_%d_Track_%d_ClipSlot" % (scene_index, track_index)
                 clip_slot.set_launch_button(button)
+                # self.log_message("\nClip slot class:%s" % clip_slot.__class__)
+                # self.log_message("\nClip slot:\n%s" % dir(clip_slot))
+
+        # TODO This is an experiment of setting a button to both arm a track
+        # for recording and immediately start the clip recording
+        # self._session.set_clip_play_or_rec(self, self._session.scene(0).clip_slot(0), self._note_map[25])
+        
         self._session_zoom = SpecialZoomingComponent(self._session)
         self._session_zoom.name = 'Session_Overview'
         self._session_zoom.set_nav_buttons(self._note_map[ZOOMUP], self._note_map[ZOOMDOWN], self._note_map[ZOOMLEFT], self._note_map[ZOOMRIGHT])
 
     def _setup_mixer_control(self):
-        is_momentary = True
+        # is_momentary = True
         self._mixer = SpecialMixerComponent(8)
         self._mixer.name = 'Mixer'
         self._mixer.master_strip().name = 'Master_Channel_Strip'
@@ -141,7 +155,7 @@ class TSMIDIClass(ControlSurface):
 
 
     def _setup_device_and_transport_control(self):
-        is_momentary = True
+        # is_momentary = True
         self._device = DeviceComponent()
         self._device.name = 'Device_Component'
         device_bank_buttons = []
@@ -211,7 +225,7 @@ class TSMIDIClass(ControlSurface):
         # momentary message first sends 127, followed by 0.
         #
         # Set this flag according to which kind of messages you're using.
-        is_momentary = False
+        is_momentary = True
 
         for note in range(128):
             button = ButtonElement(is_momentary, MESSAGETYPE, BUTTONCHANNEL, note)
